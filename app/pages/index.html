@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html>
+	<head>
+
+		<!-- Main CSS -->
+		<link rel="stylesheet" type="text/css" href="../src/css/frontend/main.css">
+
+		<script src="http://maps.googleapis.com/maps/api/js?sensor=false&amp;libraries=places&amp;key=AIzaSyC3yKdD_jDNxb4dEL4AD_eDcltW8WiVvPU"></script>
+
+		<!-- RequireJS -->
+		<script src="../src/js/frontend/libs/require.js"></script>
+
+	</head>
+	<body class="wdx-app wdx-25">
+
+		<!-- Start ~ Header -->
+		<div class="wdx-header wdx-25 wdx-wrapper"></div>
+		<!-- End ~ Header -->
+
+		<!-- Start ~ Sidebar -->
+		<div class="wdx-sidebar-container">
+			<div class="wdx-sidebar wdx-25 wdx-wrapper"></div>
+			<div class="wdx-sidebar-overlay"></div>
+		</div>
+		<!-- End ~ Sidebar -->
+
+		<!-- Start ~ Page -->
+		<div class="wdx-page"></div>
+		<!-- End ~ Page -->
+
+		<!-- Start ~ Footer -->
+		<div class="wdx-footer"></div>
+		<!-- End ~ Footer -->
+
+		<script>
+			requirejs(['../src/js/frontend/config'],function(){
+				requirejs(['jQuery','geocomplete','app','home'],
+				function() {
+					var app = new App(), home = new Home();
+					app.init();
+					home.init();
+				});
+			});
+		</script>
+
+		<style>
+			.pac-container {
+				width: 100% !important;
+				position: absolute !important;
+				left: 0px !important;
+				top: 40px !important;
+				border: none !important;
+				border-radius: 0px !important;
+			}
+			.pac-item {
+				padding: 4px 8px !important;
+			}
+			.pac-logo:after {
+				display: none !important;
+			}
+		</style>
+
+	</body>
+</html>

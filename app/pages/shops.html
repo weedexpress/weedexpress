@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html>
+	<head>
+
+		<!-- Main CSS -->
+		<link rel="stylesheet" type="text/css" href="../src/css/frontend/main.css">
+
+		<!-- Mapbox -->
+		<script src='https://api.tiles.mapbox.com/mapbox-gl-js/v0.44.1/mapbox-gl.js'></script>
+
+		<!-- RequireJS -->
+		<script src="../src/js/frontend/libs/require.js"></script>
+
+	</head>
+	<body class="wdx-app wdx-25">
+
+		<!-- Start ~ Header -->
+		<div class="wdx-header wdx-25 wdx-wrapper"></div>
+		<!-- End ~ Header -->
+
+		<!-- Start ~ Sidebar -->
+		<div class="wdx-sidebar-container">
+			<div class="wdx-sidebar wdx-25 wdx-wrapper"></div>
+			<div class="wdx-sidebar-overlay"></div>
+		</div>
+		<!-- End ~ Sidebar -->
+
+		<!-- Start ~ Page -->
+		<div class="wdx-page">
+				
+			<!-- Start ~ Shops Page -->
+			<div class="wdx-shops"></div>
+			<!-- End ~ Shops Page -->
+
+		</div>
+		<!-- End ~ Page -->
+
+		<!-- Start ~ Footer -->
+		<div class="wdx-footer"></div>
+		<!-- End ~ Footer -->
+
+		<script>
+			requirejs(['../src/js/frontend/config'],function(){
+				requirejs(['jQuery','gmaps','app','api','shops'],
+				function() {
+					var app = new App(), api = new API(), shops = new Shops();
+					app.init();
+					shops.init();
+				});
+			});
+		</script>
+
+		<style>
+			.wdx-shops-map {
+			    position: fixed;
+			    bottom: 0;
+			    right: 0;
+			    width: 100vw;
+			    height: calc(100vh - 55px);
+			}
+		</style>
+
+	</body>
+</html>
