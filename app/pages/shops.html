@@ -5,6 +5,9 @@
 		<!-- Main CSS -->
 		<link rel="stylesheet" type="text/css" href="../src/css/frontend/main.css">
 
+		<!-- gmaps -->
+		<script src="https://maps.googleapis.com/maps/api/js?sensor=false&amp;libraries=places&amp;key=AIzaSyC3yKdD_jDNxb4dEL4AD_eDcltW8WiVvPU"></script>
+
 		<!-- Mapbox -->
 		<script src='https://api.tiles.mapbox.com/mapbox-gl-js/v0.44.1/mapbox-gl.js'></script>
 
@@ -41,7 +44,7 @@
 
 		<script>
 			requirejs(['../src/js/frontend/config'],function(){
-				requirejs(['jQuery','gmaps','app','api','shops'],
+				requirejs(['jQuery','app','api','shops'],
 				function() {
 					var app = new App(), api = new API(), shops = new Shops();
 					app.init();

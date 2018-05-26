@@ -26,7 +26,11 @@
 		<!-- End ~ Sidebar -->
 
 		<!-- Start ~ Page -->
-		<div class="wdx-page"></div>
+		<div class="wdx-page">
+			<!-- Start ~ Shop Page -->
+			<div class="wdx-shop"></div>
+			<!-- End ~ Shop Page -->
+		</div>
 		<!-- End ~ Page -->
 
 		<!-- Start ~ Footer -->
@@ -35,31 +39,15 @@
 
 		<script>
 			requirejs(['../src/js/frontend/config'],function(){
-				requirejs(['jQuery','geocomplete','app','home'],
+				requirejs(['jQuery','app','api','shop','products'],
 				function() {
-					var app = new App(), home = new Home();
+					var app = new App(), api = new API(), shop = new Shop(), products = new Products();
 					app.init();
-					home.init();
+					shop.init();
+					products.init();
 				});
 			});
 		</script>
-
-		<style>
-			.pac-container {
-				width: 100% !important;
-				position: absolute !important;
-				left: 0px !important;
-				top: 40px !important;
-				border: none !important;
-				border-radius: 0px !important;
-			}
-			.pac-item {
-				padding: 4px 8px !important;
-			}
-			.pac-logo:after {
-				display: none !important;
-			}
-		</style>
 
 	</body>
 </html>

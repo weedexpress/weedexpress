@@ -19,6 +19,31 @@ class API {
 		return mi.toFixed(1);
 	}
 
+	unique(arr, comparator) {
+        let uniqueArr = [];
+        for (let i in arr) {
+            let found = false;
+            for (let j in uniqueArr) {
+                if (comparator instanceof Function) {
+                    if (comparator.call(null, arr[i], uniqueArr[j])) {
+                        found = true;
+                        break;
+                    }
+                }
+                else {
+                    if (arr[i] == uniqueArr[j]) {
+                        found = true;
+                        break;
+                    }
+                }
+            }
+            if (!found) {
+                uniqueArr.push(arr[i]);
+            }
+        }
+        return uniqueArr;
+    }
+
 	getPage() {
 		var page;
 		page = window.location.pathname;
