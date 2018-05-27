@@ -39,9 +39,10 @@
 
 		<script>
 			requirejs(['../src/js/frontend/config'],function(){
-				requirejs(['jQuery','app','api','shop','products'],
-				function() {
+				requirejs(['nouislider','jQuery','app','api','shop','products'],
+				function(nouislider) {
 					var app = new App(), api = new API(), shop = new Shop(), products = new Products();
+					window.noUiSlider = nouislider;
 					app.init();
 					shop.init();
 					products.init();

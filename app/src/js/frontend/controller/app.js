@@ -1,9 +1,19 @@
 class App {
 
 	init() {
-		this.footer();
+		this.meta();
 		this.header();
+		this.footer();
 		this.onScreen();
+	}
+
+	meta() {
+		let container, content;
+		container = jQuery('head');
+		content = 	`<title>weedexpress</title>
+					<meta charset="UTF-8">
+					<meta name="viewport" content="width=device-width, initial-scale=1">`;
+		container.prepend(content);
 	}
 
 	header() {

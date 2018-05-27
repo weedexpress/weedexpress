@@ -35,7 +35,7 @@ class Products {
 				content = this.productContent(id);
 				
 				// product template
-				product = 	`<div class="wdx-shop-product wdx-shop-product-`+id+` wdx-xs-100 wdx-sm-50 wdx-md-50 wdx-lg-33" data-group="`+content.group+`" data-type="`+content.type+`" data-size="">
+				product = 	`<div class="wdx-shop-product wdx-shop-product-`+id+` wdx-xs-100 wdx-sm-50 wdx-md-50 wdx-lg-33" data-group="`+content.group+`" data-type="`+content.type+`" data-size="" data-price="">
 								<div class="wdx-shop-product-content">
 									<div class="wdx-shop-product-image wdx-wrapper" style="background: #333; background-size: cover; background-position: center center;">
 										<div class="wdx-shop-product-strength"></div>
@@ -130,12 +130,13 @@ class Products {
 				}
 			}
 			product.data('size',list.size);
+			product.data('price',list.price);
 		}
 
 		// Product filter
 		productFilter() {
-			let options, filter, filters, groups = [], types = [], sizes = [], api = new API();
-			filter = {'group':groups,'type':types,'size':sizes};
+			let options, filter, filters, groups = [], types = [], sizes = [], prices = [], api = new API();
+			filter = {'group':groups,'type':types,'size':sizes,'price':prices};
 			options = ['group','type','size','strength','price'];
 			jQuery('.wdx-shop-product').each(function() {
 				let item, group, type, size, strength, price;
@@ -143,10 +144,13 @@ class Products {
 				group = item.data('group');
 				type = item.data('type');
 				size = item.data('size');
+				price = item.data('price');
 				groups.push(group);
 				types.push(type);
 				if(size.length > 0) { size.forEach(function(element) { sizes.push(element); }); }
 				else { sizes.push(size); }
+				if(price.length > 0) { price.forEach(function(element) { prices.push(element); }); }
+				else { prices.push(price); }
 			});
 			for (var i = 0; i < options.length; i++) {
 				switch(options[i]) {
@@ -160,7 +164,30 @@ class Products {
 				for (var ii = 0; ii < filters.length; ii++) {
 					jQuery('.wdx-shop-sidebar-'+options[i]+' .wdx-shop-sidebar-content-container').append('<div class="wdx-shop-sidebar-content-item wdx-wrapper" data-parent="'+options[i]+'" data-name="'+filters[ii]+'">'+filters[ii].replace(/-/g, ' ')+'</div>');
 				}
+				if(options[i] == 'price') {
+					jQuery('.wdx-shop-sidebar-'+options[i]+' .wdx-shop-sidebar-content-container').append('<div id="wdx-shop-sidebar-price-slider"></div>');
+				}
 			}
+
+			console.log(prices);
+
+			let slider = document.getElementById('wdx-shop-sidebar-price-slider');
+			noUiSlider.create(slider, {
+				start: [25,150],
+				behaviour: 'drag',
+				connect: true,
+				step: 25,
+				range: {
+				  'min': 0,
+				  'max': 400
+				},
+				pips: {
+					mode: 'positions',
+					values: [0,50,100,150,200,250,300,350,400],
+					density: 8
+				}
+			});
+
 			// Select filter option
 			jQuery('.wdx-shop-sidebar-content-item').on('click', function() {
 				let item, parent, name, products = new Products();
@@ -199,14 +226,12 @@ class Products {
 			jQuery('.wdx-shop-product').each(function() {
 				let item, filter;
 				item = jQuery(this);
-				filter = item.data(option);
+				filter = item.data(option).toString();
 				if(filter.length > 0) {
 					if(filter.includes(select)) {
-						console.log('has option');
 						item.addClass('has-option-'+parent).removeClass('no-option-'+parent);
 					}
 					else {
-						console.log('no option');
 						item.removeClass('has-option-'+parent).addClass('no-option-'+parent);
 					}
 				}
@@ -283,7 +308,7 @@ class Products {
 		      "spid":null,
 		      "image":"http://www.thcfinder.com/uploads/files/mr-nice-cannabis-wax-medical-marijuana-wax-thcfinder.jpg",
 		      "description":"Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.",
-		      "content":"[{\"data\":[{\"product\":{\"0\":{\"size\":\"1G\",\"price\":\"15\",\"sku\":\"\"},\"1\":{\"size\":\"2G\",\"price\":\"30\",\"sku\":\"\"},\"2\":{\"size\":\"1/8 oz\",\"price\":\"\",\"sku\":\"\"},\"3\":{\"size\":\"1/4 oz\",\"price\":\"\",\"sku\":\"\"},\"4\":{\"size\":\"1/2 oz\",\"price\":\"\",\"sku\":\"\"},\"5\":{\"size\":\"1 oz\",\"price\":\"\",\"sku\":\"\"}},\"group\":\"wax\",\"type\":\"concentrate\",\"name\":\"Cali Crumble - Trainwreck\",\"strainId\":\"\",\"company\":\"a6sws5ad\",\"thc\":\"60\",\"cbd\":\"0\",\"cbn\":\"0\",\"cba\":\"0\"}]}]",
+		      "content":"[{\"data\":[{\"product\":{\"0\":{\"size\":\"1G\",\"price\":\"15\",\"sku\":\"\"},\"1\":{\"size\":\"2G\",\"price\":\"30\",\"sku\":\"\"},\"2\":{\"size\":\"1/8 oz\",\"price\":\"\",\"sku\":\"\"},\"3\":{\"size\":\"1/4 oz\",\"price\":\"\",\"sku\":\"\"},\"4\":{\"size\":\"1/2 oz\",\"price\":\"\",\"sku\":\"\"},\"5\":{\"size\":\"1 oz\",\"price\":\"\",\"sku\":\"\"}},\"group\":\"concentrates\",\"type\":\"hybrid\",\"name\":\"Cali Crumble - Trainwreck\",\"strainId\":\"\",\"company\":\"a6sws5ad\",\"thc\":\"60\",\"cbd\":\"0\",\"cbn\":\"0\",\"cba\":\"0\"}]}]",
 		      "gallery":"[{\n\t\"data\":[{\n\t\t\"images\":{\n\t\t\t\"0\":{\"url\":\"http://www.digitec.am/css/images/admin/logos/f3ccdd27d2000e3f9255a7e3e2c48800.jpg\"},\n\t\t\t\"1\":{\"url\":\"http://wfiles.brothersoft.com/e6/android_189017-640x480.jpg\"},\n\t\t\t\"2\":{\"url\":\"http://www.digitec.am/css/images/admin/logos/799bad5a3b514f096e69bbc4a7896cd9.jpg\"},\n\t\t\t\"3\":{\"url\":\"https://s-media-cache-ak0.pinimg.com/736x/12/12/e2/1212e296832af1acdfe3d553e894db9a.jpg\"},\n\t\t\t\"4\":{\"url\":\"http://wfiles.brothersoft.com/c3/android_189395-640x480.jpg\"},\n\t\t\t\"5\":{\"url\":\"http://img15.hostingpics.net/pics/253829Lovelymomentoftheanimals2.jpg\"}\n\t\t}\n\t}]\n}]",
 		      "date":"2017-07-12T17:26:18-07:00",
 		      "active":"1"
@@ -358,7 +383,7 @@ class Products {
 		      "spid":null,
 		      "image":"http://www.thcfinder.com/uploads/files/mr-nice-cannabis-wax-medical-marijuana-wax-thcfinder.jpg",
 		      "description":"Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.",
-		      "content":"[{\"data\":[{\"product\":{\"0\":{\"size\":\"1G\",\"price\":\"15\",\"sku\":\"\"},\"1\":{\"size\":\"2G\",\"price\":\"30\",\"sku\":\"\"},\"2\":{\"size\":\"1/8 oz\",\"price\":\"\",\"sku\":\"\"},\"3\":{\"size\":\"1/4 oz\",\"price\":\"\",\"sku\":\"\"},\"4\":{\"size\":\"1/2 oz\",\"price\":\"\",\"sku\":\"\"},\"5\":{\"size\":\"1 oz\",\"price\":\"\",\"sku\":\"\"}},\"group\":\"wax\",\"type\":\"concentrate\",\"name\":\"Cali Crumble - Trainwreck\",\"strainId\":\"\",\"company\":\"a6sws5ad\",\"thc\":\"60\",\"cbd\":\"0\",\"cbn\":\"0\",\"cba\":\"0\"}]}]",
+		      "content":"[{\"data\":[{\"product\":{\"0\":{\"size\":\"1G\",\"price\":\"15\",\"sku\":\"\"},\"1\":{\"size\":\"2G\",\"price\":\"30\",\"sku\":\"\"},\"2\":{\"size\":\"1/8 oz\",\"price\":\"\",\"sku\":\"\"},\"3\":{\"size\":\"1/4 oz\",\"price\":\"\",\"sku\":\"\"},\"4\":{\"size\":\"1/2 oz\",\"price\":\"\",\"sku\":\"\"},\"5\":{\"size\":\"1 oz\",\"price\":\"\",\"sku\":\"\"}},\"group\":\"concentrates\",\"type\":\"hybrid\",\"name\":\"Cali Crumble - Trainwreck\",\"strainId\":\"\",\"company\":\"a6sws5ad\",\"thc\":\"60\",\"cbd\":\"0\",\"cbn\":\"0\",\"cba\":\"0\"}]}]",
 		      "gallery":"[{\n\t\"data\":[{\n\t\t\"images\":{\n\t\t\t\"0\":{\"url\":\"http://www.digitec.am/css/images/admin/logos/f3ccdd27d2000e3f9255a7e3e2c48800.jpg\"},\n\t\t\t\"1\":{\"url\":\"http://wfiles.brothersoft.com/e6/android_189017-640x480.jpg\"},\n\t\t\t\"2\":{\"url\":\"http://www.digitec.am/css/images/admin/logos/799bad5a3b514f096e69bbc4a7896cd9.jpg\"},\n\t\t\t\"3\":{\"url\":\"https://s-media-cache-ak0.pinimg.com/736x/12/12/e2/1212e296832af1acdfe3d553e894db9a.jpg\"},\n\t\t\t\"4\":{\"url\":\"http://wfiles.brothersoft.com/c3/android_189395-640x480.jpg\"},\n\t\t\t\"5\":{\"url\":\"http://img15.hostingpics.net/pics/253829Lovelymomentoftheanimals2.jpg\"}\n\t\t}\n\t}]\n}]",
 		      "date":"2017-07-12T17:26:18-07:00",
 		      "active":"1"

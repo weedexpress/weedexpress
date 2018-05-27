@@ -22,7 +22,8 @@
 
 @import url('https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/assets/owl.carousel.min.css');
 @import url('https://api.tiles.mapbox.com/mapbox-gl-js/v0.28.0/mapbox-gl.css');
-@import url('https://api.mapbox.com/mapbox-gl-js/plugins/mapbox-gl-directions/v3.0.2/mapbox-gl-directions.css')
+@import url('https://api.mapbox.com/mapbox-gl-js/plugins/mapbox-gl-directions/v3.0.2/mapbox-gl-directions.css');
+@import url('libs/nouislider.css');
 @import url('https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css');
 @import url('https://fonts.googleapis.com/css?family=Lato:100,300,400,700,900');
 
@@ -210,7 +211,7 @@
 	}
 
 	.wdx-header-blank {
-		width: calc(100% - 300px);
+		width: calc(100% - 350px);
 	}
 
 	.wdx-header-menu {
@@ -447,11 +448,11 @@
 		}
 
 		.wdx-page-sidebar-left.moved {
-		    left: -300px;
+		    left: -350px;
 		}
 
 		.wdx-page-sidebar-right.moved {
-		    right: -300px;
+		    right: -350px;
 		}
 
 		.wdx-page-sidebar.active {
@@ -475,7 +476,7 @@
 
 		.wdx-page-sidebar {
 			position: absolute;
-			width: 300px;
+			width: 350px;
 			height: calc(100vh - 56px);
 			background: #fff;
 			z-index: 9;
@@ -546,17 +547,17 @@
 		}
 
 		.wdx-page-toolbar-left {
-			left: 300px;
+			left: 350px;
 		}
 
 		.wdx-page-toolbar-right {
-			right: 300px;
+			right: 350px;
 		}
 
 		.wdx-page-toolbar {
 			position: absolute;
 			background: #fff;
-			width: calc(100vw - 300px);
+			width: calc(100vw - 350px);
 			height: 50px;
 			border-top: 1px solid rgba(20,20,20,0.1);
 			border-bottom: 1px solid rgba(20,20,20,0.1);
@@ -639,7 +640,7 @@
 		}
 
 		.wdx-page-grid-left {
-			left: 300px;
+			left: 350px;
 		}
 
 		.wdx-page-grid-right {
@@ -658,7 +659,7 @@
 
 		@media (min-width: 1200px) {
 			.wdx-page-grid {
-				width: calc(100vw - 300px);
+				width: calc(100vw - 350px);
 			    position: relative;
 			}
 		}
@@ -716,15 +717,15 @@
 		}
 
 		.wdx-homepage-hero:after {
-		    content: '';
-		    background: #fff;
-		    position: absolute;
-		    width: 125%;
-		    height: 300px;
-		    bottom: -25%;
-		    left: -10%;
-		    transform: rotate(-5deg);
-		    z-index: 1;
+			content: '';
+			background: #fff;
+			position: absolute;
+			width: 125%;
+			height: 375px;
+			bottom: -25%;
+			left: -10%;
+			transform: rotate(-5deg);
+			z-index: 1;
 		}
 
 		.wdx-homepage-video {
@@ -829,7 +830,7 @@
 		    background: inherit;
 		    position: absolute;
 		    width: 125vw;
-		    height: 300px;
+		    height: 350px;
 		    top: -125px;
 		    left: -10%;
 		    transform: rotate(-5deg);
@@ -988,9 +989,9 @@
 
 		.wdx-shops-list-toolbar {
 			position: absolute;
-			left: 300px;
+			left: 350px;
 			background: #fff;
-			width: calc(100vw - 300px);
+			width: calc(100vw - 350px);
 			height: 50px;
 			border-top: 1px solid rgba(20,20,20,0.1);
 			border-bottom: 1px solid rgba(20,20,20,0.1);
@@ -1033,9 +1034,9 @@
 
 		@media (min-width: 1200px) {
 			.wdx-shops-list-grid {
-				width: calc(100vw - 300px);
+				width: calc(100vw - 350px);
 			    position: relative;
-			    left: 300px;
+			    left: 350px;
 			}
 		}
 
@@ -1052,7 +1053,7 @@
 		}
 
 		.wdx-shops-list-sidebar.moved {
-		    left: -300px;
+		    left: -350px;
 		}
 
 		.wdx-shops-list-sidebar.active {
@@ -1063,7 +1064,7 @@
 		.wdx-shops-list-sidebar {
 			position: absolute;
 			left: 0px;
-			width: 300px;
+			width: 350px;
 			height: calc(100vh - 56px);
 			background: #fff;
 			z-index: 9;
@@ -1433,7 +1434,7 @@
 		}
 
 		.wdx-shop-info-content {
-			width: 300px;
+			width: 350px;
 			position: relative;
 		}
 
@@ -1516,13 +1517,13 @@
 		}
 
 		.wdx-shop-sidebar.moved {
-		    left: -300px;
+		    left: -350px;
 		}
 
 		.wdx-shop-sidebar {
 		    position: absolute;
 		    left: 0px;
-		    width: 300px;
+		    width: 350px;
 		    height: calc(100vh - 56px);
 		    background: #fff;
 		    z-index: 9;
@@ -1567,11 +1568,15 @@
 		}
 
 		.wdx-shop-sidebar-clear-content {
-		    color: #ff4617;
-		    font-size: 10px;
-		    font-weight: 400;
-		    padding: 4px 30px;
-		    cursor: pointer;
+			display: inline-block;
+			background: #f44336;
+			color: #fff;
+			font-size: 9px;
+			letter-spacing: 1px;
+			padding: 3px 6px;
+			margin-left: 30px;
+			border-radius: 4px;
+			cursor: pointer;
 		}
 		
 		.wdx-shop-toolbar.active {
@@ -1586,9 +1591,9 @@
 
 		.wdx-shop-toolbar {
 		    position: absolute;
-		    left: 300px;
+		    left: 350px;
 		    background: #fff;
-		    width: calc(100vw - 300px);
+		    width: calc(100vw - 350px);
 		    height: 50px;
 		    border-top: 1px solid rgba(20,20,20,0.1);
 		    border-bottom: 1px solid rgba(20,20,20,0.1);
@@ -1627,6 +1632,7 @@
 		
 		.wdx-shop-products {
 			width: 100%;
+			min-height: 100vh;
 			position: relative;
 			left: 0px;
 		}
@@ -1647,13 +1653,15 @@
 
 		.has-option-type,
 		.has-option-group,
-		.has-option-size {
+		.has-option-size,
+		.has-option-price {
 			display: flex;
 		}
 
 		.no-option-type,
 		.no-option-group,
-		.no-option-size {
+		.no-option-size,
+		.no-option-price {
 			display: none;
 		}
 
@@ -1930,9 +1938,9 @@
 		/* Large */
 		@media( min-width: 1200px ) {
 			.wdx-shop-products {
-				width: calc(100vw - 300px);
+				width: calc(100vw - 350px);
 				position: relative;
-				left: 300px;
+				left: 350px;
 			}
 		}
 

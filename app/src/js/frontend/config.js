@@ -10,6 +10,7 @@ requirejs.config({
         localforage: 'libs/localforage',
         moment: 'libs/moment.min',
         messenger: 'libs/messenger',
+        nouislider: 'libs/nouislider.min',
         progress: 'libs/progressbar.min',
         geocomplete: 'libs/geocomplete',
         youtube: 'libs/youtube',

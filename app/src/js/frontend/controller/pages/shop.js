@@ -166,7 +166,7 @@ class Shop {
 	shopSidebarOptions() {
 		var container, options, option;
 		container = jQuery('.wdx-shop-sidebar-container');
-		options = ['group','type','size','strength','price'];
+		options = ['group','type','price','size','strength'];
 		for (var i = 0; i < options.length; i++) {
 			option = 	`<div class="wdx-shop-sidebar-item wdx-shop-sidebar-`+options[i]+`">
 							<div class="wdx-shop-sidebar-title">
