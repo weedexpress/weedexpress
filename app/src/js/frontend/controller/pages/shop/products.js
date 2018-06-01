@@ -122,7 +122,7 @@ class Products {
 				if(data.price) {
 					list.size.push(data.size.replace(/\s+/g, '-'));
 					list.price.push(data.price);
-					content = 	`<div class="wdx-shop-product-pricing-item">
+					content = 	`<div class="wdx-shop-product-pricing-item" data-price="`+data.price+`">
 									<div class="wdx-shop-product-pricing-title wdx-wrapper">`+data.size+`</div>
 									<div class="wdx-shop-product-pricing-value wdx-wrapper">$`+data.price+`</div>
 								</div>`;
@@ -135,7 +135,7 @@ class Products {
 
 		// Product filter
 		productFilter() {
-			let options, filter, filters, groups = [], types = [], sizes = [], prices = [], api = new API();
+			let options, filter, filters, min, mid, max, slider, data, groups = [], types = [], sizes = [], prices = [], api = new API();
 			filter = {'group':groups,'type':types,'size':sizes,'price':prices};
 			options = ['group','type','size','strength','price'];
 			jQuery('.wdx-shop-product').each(function() {
@@ -161,31 +161,48 @@ class Products {
 				// Build menu options
 				filters = this.shopFilter[options[i]].sort();
 				jQuery('.wdx-shop-sidebar-'+options[i]+' .wdx-shop-sidebar-content-container').append('<div class="wdx-shop-sidebar-clear-content" data-parent="'+options[i]+'">clear '+options[i]+'</div>');
-				for (var ii = 0; ii < filters.length; ii++) {
-					jQuery('.wdx-shop-sidebar-'+options[i]+' .wdx-shop-sidebar-content-container').append('<div class="wdx-shop-sidebar-content-item wdx-wrapper" data-parent="'+options[i]+'" data-name="'+filters[ii]+'">'+filters[ii].replace(/-/g, ' ')+'</div>');
-				}
 				if(options[i] == 'price') {
 					jQuery('.wdx-shop-sidebar-'+options[i]+' .wdx-shop-sidebar-content-container').append('<div id="wdx-shop-sidebar-price-slider"></div>');
 				}
+				else {
+					for (var ii = 0; ii < filters.length; ii++) {
+						jQuery('.wdx-shop-sidebar-'+options[i]+' .wdx-shop-sidebar-content-container').append('<div class="wdx-shop-sidebar-content-item wdx-wrapper" data-parent="'+options[i]+'" data-name="'+filters[ii]+'">'+filters[ii].replace(/-/g, ' ')+'</div>');
+					}
+				}
 			}
 
-			console.log(prices);
+			min = api.arrayMin(prices);
+			max = api.arrayMax(prices);
 
-			let slider = document.getElementById('wdx-shop-sidebar-price-slider');
+			slider = document.getElementById('wdx-shop-sidebar-price-slider');
 			noUiSlider.create(slider, {
-				start: [25,150],
+				start: [0,(max + 50)],
 				behaviour: 'drag',
 				connect: true,
 				step: 25,
 				range: {
 				  'min': 0,
-				  'max': 400
+				  'max': (max + 50)
 				},
 				pips: {
 					mode: 'positions',
-					values: [0,50,100,150,200,250,300,350,400],
+					values: [0,(max + 50)],
 					density: 8
 				}
+			});
+
+			slider.noUiSlider.on('update', function ( values, handle, unencoded, isTap, positions ) {
+				jQuery('.wdx-shop-product-pricing-item').each(function() {
+					let item, price, min, max;
+					item = jQuery(this);
+					price = item.data('price');
+					if(values[0] < price && values[1] > price) {
+						item.addClass('active');
+					}
+					else {
+						item.removeClass('active');
+					}
+				});
 			});
 
 			// Select filter option

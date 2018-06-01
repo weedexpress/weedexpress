@@ -44,6 +44,14 @@ class API {
         return uniqueArr;
     }
 
+    arrayMax(arr) {
+	  return arr.reduce((a, b) => Math.max(a, b));
+	}
+
+	arrayMin(arr) {
+	  return arr.reduce((a, b) => Math.min(a, b));
+	}
+
 	getPage() {
 		var page;
 		page = window.location.pathname;
